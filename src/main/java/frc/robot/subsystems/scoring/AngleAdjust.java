@@ -43,13 +43,4 @@ public void angleAdjustStop(double speed) {
   angler.set(0);
 }  
 
-public void lowerArm(){
-  //Do something to lower the arm to lowest point we can intake here
-  angler.set(-0.2);
-}
-
-public void angleArm(){ 
-  angler.set(0.2);
-}
-
 }
