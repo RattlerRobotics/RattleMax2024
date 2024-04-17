@@ -17,9 +17,11 @@ public static final TalonFX shooterBottom = new TalonFX (ShooterConstants.kShoot
   /**top shooter with canbus ID 32 */
 public static final TalonFX shooterTop = new TalonFX (ShooterConstants.kShooterTopID);
 
-
     /* Creates a new Shooter. */
-public Shooter() {}
+public Shooter() {
+  TalonFXRPMHelper.setPID(shooterBottom, 0.12, 0.11, 0, 0, 0.05);
+  TalonFXRPMHelper.setPID(shooterTop, 0.12, 0.11, 0, 0, 0.05);
+}
     
 @Override
 public void periodic() {
