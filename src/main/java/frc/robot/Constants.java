@@ -28,7 +28,16 @@ public final class Constants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
     public static double kMaxSpeedMetersPerSecond = 4.8; //max 4.8
-    public static double kMaxAngularSpeed = 1.35 * Math.PI; // max 2 * pi radians per second
+    
+      //Sets the high and max turning speed, seperate variable so you don't have to swap two values
+    private static double maxTurnSpeed = 1.35 * Math.PI; // Max 2
+      //Sets low turning speed
+    public static double kLowTurnSpeed = 0.50 * Math.PI;  // Min 0.01
+    
+      //Used by robot to set max angular speed, adjust maxTurnSpeed variable to change this
+    public static double kMaxAngularSpeed = maxTurnSpeed; 
+      //Used by drive susbsytem to change to high turning, change max turn speed to adjust this. 
+    public static double kHighTurnSpeed = maxTurnSpeed;
 
     public static final int kLedPortID = 9;
 

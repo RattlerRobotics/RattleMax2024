@@ -26,8 +26,7 @@ import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
 import edu.wpi.first.wpilibj.DriverStation;
-//import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-//import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
 
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
@@ -335,11 +334,11 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void changeTurnSpeedHigh () {
-    DriveConstants.kMaxAngularSpeed= 1.35 * Math.PI;
+    DriveConstants.kMaxAngularSpeed= DriveConstants.kHighTurnSpeed;
   }
 
   public void changeTurnSpeedLow() {
-    DriveConstants.kMaxAngularSpeed= 0.5 * Math.PI;
+    DriveConstants.kMaxAngularSpeed = DriveConstants.kLowTurnSpeed;
   }
 
  
