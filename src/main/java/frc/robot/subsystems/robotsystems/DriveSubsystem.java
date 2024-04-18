@@ -31,7 +31,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
-import frc.robot.subsystems.scoring.Shooter;
 import frc.utils.SwerveUtils;
 
 
@@ -76,7 +75,6 @@ public class DriveSubsystem extends SubsystemBase {
   private SlewRateLimiter m_rotLimiter = new SlewRateLimiter(DriveConstants.kRotationalSlewRate);
   private double m_prevTime = WPIUtilJNI.now() * 1e-6;
   
-  private Shooter m_Shooter = new Shooter();
 
 
   /**  Odometry class for tracking robot pose*/
@@ -145,16 +143,6 @@ public class DriveSubsystem extends SubsystemBase {
   }
   
   
-    
-  /**
-   * Sets the wheels in an X pattern
-   * <p>Sets the wheels straight
-   */
-  public void autonStart(){
-    setX();
-    setWheelsStraight();
-    m_Shooter.shootNote();
-  }
 
 
     /**

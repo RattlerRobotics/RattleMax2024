@@ -11,7 +11,7 @@ import frc.robot.subsystems.scoring.AngleAdjust;
 import frc.robot.subsystems.scoring.Climber;
 import frc.robot.subsystems.scoring.Intake;
 import frc.robot.subsystems.scoring.Shooter;
-//WPI imports
+  //WPI imports
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -19,15 +19,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
-
-
-
-
+  //Pathplanner Imports
 import com.pathplanner.lib.auto.AutoBuilder;
-//import com.pathplanner.lib.commands.PathPlannerAuto;   add this in if you want to manually add autos and not just every auto in pathplanner
+import com.pathplanner.lib.auto.NamedCommands;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -57,7 +54,9 @@ private final SendableChooser<Command> autoChooser;
    */
   public RobotContainer() {
   
-  
+      //Shoots a single note
+    NamedCommands.registerCommand("Shoot Speaker", Commands.run(m_shooter::shootNote, m_shooter).withTimeout(0.5));
+
 
       // Configure the button bindings
     configureButtonBindings();
