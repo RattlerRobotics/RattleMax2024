@@ -16,6 +16,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //Talon imports
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -28,12 +29,12 @@ public class Intake extends SubsystemBase {
 
 public static final CANSparkMax intakeBottom = new CANSparkMax(IntakeConstants.kBottomIntakeID,MotorType.kBrushless );
 public static final TalonFX talonIntake = new TalonFX (IntakeConstants.kIntakeID);
-private static final Spark led = new Spark(DriveConstants.kLedPortID);
+public static final Spark led = new Spark(DriveConstants.kLedPortID);
 
 private static final I2C.Port i2cPort = I2C.Port.kOnboard;
 private static final ColorSensorV3 m_colorSensorV3 = new ColorSensorV3(i2cPort);
 
-
+private boolean noteIn = true;
 
   /** Creates a new Intake. */
   public Intake() {
@@ -57,9 +58,12 @@ private static final ColorSensorV3 m_colorSensorV3 = new ColorSensorV3(i2cPort);
 
     if(m_colorSensorV3.getProximity() > 2000) {
       led.set(-0.49);
+      noteIn = true;
     }else{
       led.set(0.0);
+      noteIn = false;
     }
+    SmartDashboard.putBoolean("Note is in", noteIn);
 
   }
 

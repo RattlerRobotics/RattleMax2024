@@ -2,10 +2,12 @@ package frc.robot.subsystems.scoring;
 
   //Robot Imports
 import frc.robot.Constants.ShooterConstants;
+
 //Talon imports
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.subsystems.helpers.TalonFXRPMHelper;
-  //WPI imports
+import edu.wpi.first.wpilibj.DriverStation;
+//WPI imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -56,7 +58,16 @@ public void shooterSpeaker(){
  */
 public void shootNote(){
   shooterSpeaker();
-  Intake.talonIntake.set(1);
+  Intake.talonIntake.set(0.6);
+  Intake.intakeBottom.set(1);
+  var alliance = DriverStation.getAlliance();
+  if (alliance.isPresent()) {
+    if (alliance.get() == DriverStation.Alliance.Red){
+      Intake.led.set(-0.85);
+    }else if (alliance.get() == DriverStation.Alliance.Blue){
+      Intake.led.set(-0.83); 
+    }
+  }
 }
 
     /**

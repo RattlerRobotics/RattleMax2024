@@ -55,7 +55,8 @@ private final SendableChooser<Command> autoChooser;
   public RobotContainer() {
   
       //Shoots a single note
-    NamedCommands.registerCommand("Shoot Speaker", Commands.run(m_shooter::shootNote, m_shooter).withTimeout(0.5));
+    NamedCommands.registerCommand("Shoot Speaker", Commands.runOnce(m_intake::intakeRun, m_intake));
+    NamedCommands.registerCommand("Stop Shooter", Commands.runOnce(m_shooter::shooterSpeaker, m_shooter));
 
 
       // Configure the button bindings
