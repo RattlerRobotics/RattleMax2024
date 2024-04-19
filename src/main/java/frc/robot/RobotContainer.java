@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
   //Pathplanner Imports
@@ -55,8 +54,8 @@ private final SendableChooser<Command> autoChooser;
   public RobotContainer() {
   
       //Shoots a single note
-    NamedCommands.registerCommand("Shoot Speaker", Commands.runOnce(m_intake::intakeRun, m_intake));
-    NamedCommands.registerCommand("Stop Shooter", Commands.runOnce(m_shooter::shooterSpeaker, m_shooter));
+    NamedCommands.registerCommand("Shoot Speaker", m_shooter.shootSpeaker());
+  
 
 
       // Configure the button bindings

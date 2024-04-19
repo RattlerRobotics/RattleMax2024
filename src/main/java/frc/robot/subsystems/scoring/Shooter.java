@@ -7,6 +7,7 @@ import frc.robot.Constants.ShooterConstants;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.subsystems.helpers.TalonFXRPMHelper;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.Command;
 //WPI imports
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -53,10 +54,8 @@ public void shooterSpeaker(){
   TalonFXRPMHelper.setRPM(shooterTop, 60);
 }
 
-/*
- * Command for auton 
- */
-public void shootNote(){
+
+public void scoreNote(){
   shooterSpeaker();
   Intake.talonIntake.set(0.6);
   Intake.intakeBottom.set(1);
@@ -68,6 +67,13 @@ public void shootNote(){
       Intake.led.set(-0.83); 
     }
   }
+}
+
+/*
+ * Command for auton 
+ */
+public Command shootSpeaker(){
+  return this.run(()->scoreNote()).withTimeout(1);
 }
 
     /**
@@ -89,7 +95,7 @@ public void shooterSuck(){
 }
 
     /**
-     * Spins motors really fast, suposedly does the trap
+     * Spins motors kinda fast, suposedly does the trap
     */
 public void shooterTrap(){
   shooterBottom.set(-.5);
