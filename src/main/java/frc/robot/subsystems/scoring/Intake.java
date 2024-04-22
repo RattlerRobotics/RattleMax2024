@@ -35,6 +35,7 @@ private static final I2C.Port i2cPort = I2C.Port.kOnboard;
 private static final ColorSensorV3 m_colorSensorV3 = new ColorSensorV3(i2cPort);
 
 private boolean noteIn = true;
+private boolean noteShot = false;
 
   /** Creates a new Intake. */
   public Intake() {
@@ -80,11 +81,8 @@ private boolean noteIn = true;
         led.set(-0.83); 
       }
     }
-  }
-
-  public void intakeAuto(){
-    talonIntake.set(1);
-    intakeBottom.set(1);
+    noteShot = true;
+    SmartDashboard.putBoolean("note fired", noteShot);
   }
 
   
@@ -92,5 +90,17 @@ private boolean noteIn = true;
   public void intakeStop(){
     talonIntake.set(0);
   }
+
+  public boolean noteFired(){
+    if (noteShot){
+      noteShot = false;
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+
+
 }
 

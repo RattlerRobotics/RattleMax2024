@@ -11,7 +11,8 @@ import frc.robot.subsystems.scoring.AngleAdjust;
 import frc.robot.subsystems.scoring.Climber;
 import frc.robot.subsystems.scoring.Intake;
 import frc.robot.subsystems.scoring.Shooter;
-  //WPI imports
+import frc.robot.subsystems.scoring.autonCommands.shootNote;
+//WPI imports
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -54,7 +55,7 @@ private final SendableChooser<Command> autoChooser;
   public RobotContainer() {
   
       //Shoots a single note
-    NamedCommands.registerCommand("Shoot Speaker", m_shooter.shootSpeaker());
+    NamedCommands.registerCommand("Shoot Speaker", new shootNote(m_shooter, m_intake));
   
 
 
