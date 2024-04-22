@@ -3,6 +3,7 @@ package frc.robot.subsystems.scoring;
   //Robot Imports
 import frc.robot.Constants.ShooterConstants;
 
+import com.ctre.phoenix6.controls.VelocityVoltage;
 //Talon imports
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.subsystems.helpers.TalonFXRPMHelper;
@@ -56,9 +57,8 @@ public void shooterSpeaker(){
 
 
 public void scoreNote(){
-  shooterSpeaker();
-  Intake.talonIntake.set(0.6);
-  Intake.intakeBottom.set(1);
+  Intake.talonIntake.set(1);
+
   var alliance = DriverStation.getAlliance();
   if (alliance.isPresent()) {
     if (alliance.get() == DriverStation.Alliance.Red){
@@ -67,13 +67,23 @@ public void scoreNote(){
       Intake.led.set(-0.83); 
     }
   }
+
+  //makes velocity into a useful number
+  VelocityVoltage velBot = new VelocityVoltage(-60);
+  VelocityVoltage velTop = new VelocityVoltage(60);
+    //Sets slot for velocity
+  velBot.Slot = 0;
+  velTop.Slot = 0;
+      //Sets motor to velocity
+  shooterBottom.setControl(velBot);  
+  shooterTop.setControl(velTop);  
 }
 
 /*
  * Command for auton 
  */
 public Command shootSpeaker(){
-  return this.run(()->scoreNote()).withTimeout(1);
+  return this.run(()->scoreNote()).withTimeout(2);
 }
 
     /**
