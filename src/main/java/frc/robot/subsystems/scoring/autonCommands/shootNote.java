@@ -9,6 +9,9 @@ public class shootNote extends Command{
      private final Shooter m_Shooter;
      private final Intake m_Intake;
 
+      private long startTime = System.currentTimeMillis();
+
+
      public shootNote(Shooter scorer, Intake sucker) {
          m_Shooter = scorer;
          m_Intake = sucker;
@@ -27,6 +30,7 @@ public class shootNote extends Command{
      @Override
      public void execute() {
         m_Intake.intakeRun();
+
      }
 
      // Called once the command ends or is interrupted.
@@ -38,7 +42,12 @@ public class shootNote extends Command{
      // Returns true when the command should end.
      @Override
      public boolean isFinished() {
-        return m_Intake.noteFired(); // (2)
+      if (System.currentTimeMillis() - startTime > 1000){
+         return true;
+      }else{
+         return false;
+      }
+      
      }
 
      @Override
