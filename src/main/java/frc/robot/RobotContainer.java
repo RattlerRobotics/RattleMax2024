@@ -55,7 +55,7 @@ private final SendableChooser<Command> autoChooser;
   public RobotContainer() {
   
       //Shoots a single note
-    NamedCommands.registerCommand("Shoot Speaker", new shootNote(m_shooter, m_intake));
+    NamedCommands.registerCommand("Shoot Speaker", new shootNote(m_shooter, m_intake).withTimeout(1));
   
 
 

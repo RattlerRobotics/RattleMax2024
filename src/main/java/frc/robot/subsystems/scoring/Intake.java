@@ -86,10 +86,11 @@ private boolean noteIn = true;
     /**stops the talon intake (not the bottom) */
   public void intakeStop(){
     talonIntake.set(0);
+    intakeBottom.set(0);
+    led.set(0.0);
   }
 
-  
-
+ 
 
 
 }

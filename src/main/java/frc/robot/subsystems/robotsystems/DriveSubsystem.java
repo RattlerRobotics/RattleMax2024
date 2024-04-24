@@ -31,7 +31,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
-import frc.robot.subsystems.helpers.LimelightHelpers;
 import frc.utils.SwerveUtils;
 
 
@@ -94,7 +93,7 @@ public class DriveSubsystem extends SubsystemBase {
      // Configure AutoBuilder last
     AutoBuilder.configureHolonomic(
             this::getPose, // Robot pose supplier
-            this::resetOdometryLL, // Method to reset odometry (will be called if your auto has a starting pose)
+            this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
             this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
             this::pathPlannerDrive, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
             new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
@@ -192,28 +191,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
 
-  /**
-   * Robot knows where it is at using limelight for odometery
-   * @param pose a failsafe botpose incase limelight fails to detect a tag
-   */
-  private void resetOdometryLL(Pose2d pose) {
-    if (LimelightHelpers.getBotPose2d("limelight") != new Pose2d(0,0, new Rotation2d(0))) {
-      pose = LimelightHelpers.getBotPose2d("limelight");
-    }
-     
-    m_odometry.resetPosition(
-        Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
-        new SwerveModulePosition[] {
-            m_frontLeft.getPosition(),
-            m_frontRight.getPosition(),
-            m_rearLeft.getPosition(),
-            m_rearRight.getPosition()
-        },
-        pose);
-    
-    
-  }
-
+ 
  
 
 
