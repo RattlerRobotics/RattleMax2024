@@ -7,11 +7,8 @@ package frc.robot;
   //Robot system imports
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.robotsystems.DriveSubsystem;
-import frc.robot.subsystems.scoring.AngleAdjust;
-import frc.robot.subsystems.scoring.Climber;
-import frc.robot.subsystems.scoring.Intake;
-import frc.robot.subsystems.scoring.Shooter;
-import frc.robot.subsystems.scoring.autonCommands.shootNote;
+import frc.robot.subsystems.scoring.exampleSubsystem;
+import frc.robot.subsystems.scoring.autonCommands.ExampleCommand;
 //WPI imports
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
@@ -39,10 +36,7 @@ private final SendableChooser<Command> autoChooser;
       // The define robot subsystems so they are usable
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
 
-  private final AngleAdjust m_angleAdjust = new AngleAdjust();
-  private final Climber m_climber = new Climber();
-  private final Intake m_intake = new Intake();
-  private final Shooter m_shooter = new Shooter();
+  private final exampleSubsystem m_shooter = new exampleSubsystem();
 
       // The driver's controller
   private Joystick m_driverController = new Joystick (OIConstants.kDriverControllerPort);
@@ -55,7 +49,7 @@ private final SendableChooser<Command> autoChooser;
   public RobotContainer() {
   
       //Shoots a single note
-    NamedCommands.registerCommand("Shoot Speaker", new shootNote(m_shooter, m_intake).withTimeout(1));
+    NamedCommands.registerCommand("Shoot Speaker", new ExampleCommand(m_shooter).withTimeout(1));
   
 
 
@@ -71,14 +65,6 @@ private final SendableChooser<Command> autoChooser;
           -MathUtil.applyDeadband(m_driverController.getZ(), OIConstants.kDriveDeadband),
           true, true),m_robotDrive));
 
-
-      //rightstick for Arm
-      m_angleAdjust.setDefaultCommand(new RunCommand(() -> m_angleAdjust.angleAdjustJoystickControl(m_operatorController.getRawAxis(5)), m_angleAdjust));
-
-      //leftstick for intake
-      m_intake.setDefaultCommand(new RunCommand(() -> m_intake.intakeJoystickControl(m_operatorController.getRawAxis(1)*.6), m_intake));
- 
-      m_climber.setDefaultCommand(new RunCommand(() -> m_climber.climberControl(0), m_climber));
 
       m_shooter.setDefaultCommand(new RunCommand(() -> m_shooter.shooterStop(), m_shooter));
 
@@ -116,28 +102,12 @@ private void configureButtonBindings() {
    new JoystickButton(m_driverController, 8).whileTrue(new RunCommand(() -> m_robotDrive.setWheelsStraight(),m_robotDrive));
     
     //wheels in x position--brake--driver top middle button    
-  new JoystickButton(m_driverController, Button.kR1.value).whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive));
-
-    //climber--back button and right trigger  forward only
-  new JoystickButton(m_operatorController, 7).whileTrue(new RunCommand(() -> m_climber.climberControl(m_operatorController.getRawAxis(3)*-1), m_climber));                          
-    
-    //Fire--Driver trigger                  
-  new JoystickButton(m_driverController, 1).whileTrue(new RunCommand(() -> m_intake.intakeRun(), m_intake)); 
+  new JoystickButton(m_driverController, Button.kR1.value).whileTrue(new RunCommand(() -> m_robotDrive.setX(),m_robotDrive)); 
         
     //Speaker shot  y button
   new JoystickButton(m_operatorController, 4).whileTrue(new RunCommand(() -> m_shooter.shooterSpeaker(), m_shooter));   
 
-    //manual shooter speed start and left trigger
-  new JoystickButton(m_operatorController, 8).whileTrue(new RunCommand(() -> m_shooter.shooterControl(m_operatorController.getRawAxis(2)*-1), m_shooter));   
-
-    //amp shot
-  new JoystickButton(m_operatorController, 1).whileTrue(new RunCommand(() -> m_shooter.shooterAmpRPM(), m_shooter));   
-
-    //trap shot
-  new JoystickButton(m_operatorController, 2).whileTrue(new RunCommand(() -> m_shooter.shooterTrap(), m_shooter));   
-
-    //shooter intake
-  new JoystickButton(m_operatorController, 3).whileTrue(new RunCommand(() -> m_shooter.shooterSuck(), m_shooter));    
+     
 
     //speical intake
   //new JoystickButton(m_operatorController, 5).whileTrue(new RunCommand(() -> m_intake.intakeSonarControl(), m_intake));    

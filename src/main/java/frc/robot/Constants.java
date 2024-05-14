@@ -8,7 +8,6 @@ import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 
 /**
@@ -133,20 +132,6 @@ public final class Constants {
     public static final double kDriveDeadband = 0.05;
   }
 
-  public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 3;//3
-    public static final double kMaxAccelerationMetersPerSecondSquared = 2;//3
-    public static final double kMaxAngularSpeedRadiansPerSecond = 1.35 * Math.PI;
-    public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
-
-    public static final double kPXController = 1;
-    public static final double kPYController = 1;
-    public static final double kPThetaController = 1;
-
-    // Constraint for the motion profiled robot angle controller
-    public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
-        kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
-  }
 
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
@@ -154,24 +139,9 @@ public final class Constants {
 
 
 
-  public static final class AngleAdjustConstants {
+  public static final class exampleSubsystemConstants {
 
-    public static final int kAngleAdjustID = 42;
-    public static final int kUpPosition = 0;
-    public static final double kDownPosition = -3000;
-
-}
-
-public static final class ClimberConstants {
-
-    public static final int kClimberID = 51;
-    
-
-}
-
-  public static final class ShooterConstants {
-
-    public static final int kShooterBottomID = 31;
+    public static final int kShooterEBottomID = 31;
     public static final int kShooterTopID = 32;
     public static final int kAmpRPM = 100;
     public static final int kSubwooferRPM = 10000;
@@ -180,12 +150,5 @@ public static final class ClimberConstants {
     }
 
 
-    public static final class IntakeConstants {
-
-      public static final int kIntakeID = 41;
-      public static final int kBottomIntakeID = 21;
-      public static final double intakeSpeed = .8;
-      public static final int kSonarID = 1;
-  
-  }
+ 
 }

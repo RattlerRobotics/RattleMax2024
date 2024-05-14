@@ -1,22 +1,19 @@
 package frc.robot.subsystems.scoring.autonCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.scoring.Intake;
-import frc.robot.subsystems.scoring.Shooter;
+import frc.robot.subsystems.scoring.exampleSubsystem;
 
-public class shootNote extends Command{
+public class ExampleCommand extends Command{
    
-   private final Shooter m_Shooter;
-   private final Intake m_Intake;
+   private final exampleSubsystem m_Shooter;
 
 
 
-   public shootNote(Shooter scorer, Intake sucker) {
+   public ExampleCommand(exampleSubsystem scorer) {
       m_Shooter = scorer;
-      m_Intake = sucker;
       
          //Makes sure command will not run unless these have been intilized
-      addRequirements(m_Shooter, m_Intake);
+      addRequirements(m_Shooter);
    }
 
    // Called when the command is initially scheduled.
@@ -29,7 +26,6 @@ public class shootNote extends Command{
    @Override
    public void execute() {
       m_Shooter.shooterSpeaker();
-      m_Intake.intakeRun();
       
    }
 
@@ -37,7 +33,6 @@ public class shootNote extends Command{
    @Override
    public void end(boolean interrupted) {
       m_Shooter.shooterStop();
-      m_Intake.intakeStop(); // (3)
    }
 
    // Returns true when the command should end.
