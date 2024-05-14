@@ -141,7 +141,7 @@ public final class Constants {
 
   public static final class exampleSubsystemConstants {
 
-    public static final int kShooterEBottomID = 31;
+    public static final int kShooterBottomID = 31;
     public static final int kShooterTopID = 32;
     public static final int kAmpRPM = 100;
     public static final int kSubwooferRPM = 10000;
